@@ -1,0 +1,11 @@
+E:\TaiLieu\multi-chat\Client\bin\Debug\Client.exe.config
+E:\TaiLieu\multi-chat\Client\bin\Debug\Client.exe
+E:\TaiLieu\multi-chat\Client\bin\Debug\Client.pdb
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.ClientForm.resources
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.Properties.Resources.resources
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.csproj.GenerateResource.cache
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.exe
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.pdb
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.LoginForm.resources
