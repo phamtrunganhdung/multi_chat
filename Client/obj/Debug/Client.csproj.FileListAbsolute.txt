@@ -9,3 +9,4 @@ E:\TaiLieu\multi-chat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 E:\TaiLieu\multi-chat\Client\obj\Debug\Client.exe
 E:\TaiLieu\multi-chat\Client\obj\Debug\Client.pdb
 E:\TaiLieu\multi-chat\Client\obj\Debug\Client.LoginForm.resources
+E:\TaiLieu\multi-chat\Client\obj\Debug\Client.SignUpForm.resources

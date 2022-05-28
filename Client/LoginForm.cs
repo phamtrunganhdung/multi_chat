@@ -13,57 +13,28 @@ namespace Client
 {
     public partial class LoginForm : Form
     {
-        SqlConnection cnn;
+        ConnectDB cnnDB = new ConnectDB();
         public LoginForm()
         {
             InitializeComponent();
-            Connect();
+            cnnDB.Connect();
         }
 
-        void Connect()
-        {
-            try
-            {
-                cnn = new SqlConnection();
-                cnn.ConnectionString = @"server=.; database=multi_chat;integrated security=true";
-                cnn.Open();
-                UpdateStatus("Database connection successful");
-            }
-            catch
-            {
-                MessageBox.Show("Can not connect to Database", "Error",
-    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-        }
-        void CloseConnect()
-        {
-            cnn.Close();
-            cnn = null;
-        }
-
-
+       
         void UpdateStatus(string s)
         {
             lblStatus.Text = s;
         }
 
-        DataTable GetDataToTable(string sql)
-        {
-            SqlDataAdapter adap = new SqlDataAdapter(sql, cnn);
-            DataTable data = new DataTable();
-
-            adap.Fill(data);
-
-            return data;
-        }
-
         void CheckLogin()
         {
-            string query = "SELECT clientName,clientPassword FROM client WHERE clientName = '" + txtUserName.Text + "' and clientPassword = '" + txtPassword.Text + "'";
-            if (GetDataToTable(query).Rows.Count > 0)
+           
+            string queryIP = "SELECT clientIP FROM client WHERE clientName = '" + txtUserName.Text + "' and clientPassword = '" + txtPassword.Text + "'";
+            if (cnnDB.GetDataToTable(queryIP).Rows.Count > 0)
             {
                 ClientForm client = new ClientForm();
+              
+                client.usersIP = cnnDB.GetDataToTable(queryIP);
                 client.ClientName = txtUserName.Text;
                 client.Show();
                 this.Hide();
@@ -90,8 +61,14 @@ namespace Client
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            CloseConnect();
+            cnnDB.CloseConnect();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SignUpForm signup = new SignUpForm();
+            signup.ShowDialog();
         }
     }
 }

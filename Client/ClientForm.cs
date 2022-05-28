@@ -19,6 +19,7 @@ namespace Client
     {
         IPEndPoint IP;
         Socket client;
+        ConnectDB cnnDB = new ConnectDB();
         public string ClientName
         {
             get
@@ -30,17 +31,26 @@ namespace Client
                 lblClient.Text = value;
             }
         }
+        public DataTable usersIP
+        {
+            set
+            {
+                dgvIP.DataSource = value;
+            }
+        }
+
         public ClientForm()
         {
             InitializeComponent();
-            ConnectToSerrver();
+            
             CheckForIllegalCrossThreadCalls = false;
         }
 
-        void ConnectToSerrver()
+        void ConnectToSerrver(string ip)
         {
-            IP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9090);
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+            lblStatus.Text = "connected to server ^^";
+            IP = new IPEndPoint(IPAddress.Parse(ip), 9090);
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             try
             {
@@ -50,6 +60,7 @@ namespace Client
             {
                 MessageBox.Show("Can not connect to server", "Error",
       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
                 return;
 
             }
@@ -64,10 +75,14 @@ namespace Client
             client.Close();
         }
         void SendData()
+            
         {
+            
             if(txtMessage.Text != string.Empty)
             {
+                string insert = "insert into message (message, clientIP) values (N'" + lblClient.Text + ":   " + txtMessage.Text + "', N'" + dgvIP.SelectedCells[0].Value.ToString() + "')";
                 client.Send(SerializeData(ClientName + ":   " + txtMessage.Text));
+                cnnDB.RunSQL(insert);
             }
             else
             {
@@ -91,6 +106,7 @@ namespace Client
             }
             catch
             {
+                this.Close();
                 CloseClient();
             }
         }
@@ -126,6 +142,29 @@ namespace Client
         private void ClientForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             CloseClient();
+        }
+
+        private void ClientForm_Load(object sender, EventArgs e)
+        {
+            string query = "SELECT message FROM message WHERE clientIP = N'" + dgvIP.SelectedCells[0].Value.ToString() + "'";
+            dgvMessage.DataSource = cnnDB.GetDataToTable(query);
+            if (dgvMessage.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvMessage.RowCount; i++)
+                {              
+                    if (dgvMessage.Rows[i].Cells[0].Value != null)
+                    {
+                        AddMessageToListView(dgvMessage.Rows[i].Cells[0].Value.ToString());
+                    }
+                    
+                }
+            }
+            
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            ConnectToSerrver(dgvIP.SelectedCells[0].Value.ToString());
         }
     }
 }

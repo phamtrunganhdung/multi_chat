@@ -35,7 +35,7 @@ namespace Server
         {
             clientList = new List<Socket>();
             IP = new IPEndPoint(IPAddress.Any, 9090);
-            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             server.Bind(IP);
 
@@ -54,6 +54,8 @@ namespace Server
                         Thread receive = new Thread(ReceiveData);
                         receive.IsBackground = true;
                         receive.Start(client);
+
+                        
                     }
                 }
                 catch
@@ -69,10 +71,12 @@ namespace Server
         {
             server.Close();
         }
-        void SendDataToAllClient(Socket client)
+        void SendDataToClient(Socket client)
         {
             if (txtMessage.Text != string.Empty)
             {
+
+                
                 client.Send(SerializeData("server:   " +txtMessage.Text));
             }
             else
@@ -133,7 +137,7 @@ namespace Server
         {
             string query = "SELECT * FROM client";
             int numClient = 0;
-            numClient = ConnectDB.GetDataToTable(query).Rows.Count;
+            numClient = cnnDB.GetDataToTable(query).Rows.Count;
             tsslAllClient.Text = numClient.ToString();
         }
 
@@ -145,11 +149,44 @@ namespace Server
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+            string clientIP = "";
+
+            foreach (var sk in clientList)
+            {
+               clientIP = ((IPEndPoint)sk.LocalEndPoint).Address.ToString();
+                string insert = "insert into message (message, clientIP) values (N'" + "server:   " + txtMessage.Text + "', N'" + clientIP + "')";
+                if (cbbClient.SelectedValue.ToString() == clientIP)
+                {
+                    SendDataToClient(sk);
+                    cnnDB.RunSQL(insert);
+                   
+                }
+            }
+            AddMessageToListView("server:   " + txtMessage.Text);
+
+        }
+
+        void LoadDataClientFromDB()
+        {
+            string query = "SELECT clientName, clientIP FROM client";
+            dgvClient.DataSource = cnnDB.GetDataToTable(query);
+            cnnDB.FillCombo(query, cbbClient, "clientIP", "clientName");
+        }
+
+        private void ServerForm_Load(object sender, EventArgs e)
+            
+        {
+            LoadDataClientFromDB();
+
+        }
+
+        private void btnSendAll_Click(object sender, EventArgs e)
+        {
             foreach (Socket item in clientList)
             {
-                SendDataToAllClient(item);
+                SendDataToClient(item);
             }
-            AddMessageToListView("server:   " +txtMessage.Text);
+            AddMessageToListView("server:   " + txtMessage.Text);
         }
     }
 }
