@@ -37,6 +37,7 @@ namespace Client
             this.btnConnect = new System.Windows.Forms.Button();
             this.dgvIP = new System.Windows.Forms.DataGridView();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIP)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +51,7 @@ namespace Client
             this.lsvMessage.TabIndex = 0;
             this.lsvMessage.UseCompatibleStateImageBehavior = false;
             this.lsvMessage.View = System.Windows.Forms.View.List;
+            this.lsvMessage.Visible = false;
             // 
             // txtMessage
             // 
@@ -58,6 +60,7 @@ namespace Client
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(217, 43);
             this.txtMessage.TabIndex = 1;
+            this.txtMessage.Visible = false;
             // 
             // btnSend
             // 
@@ -67,6 +70,7 @@ namespace Client
             this.btnSend.TabIndex = 2;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Visible = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // lblClient
@@ -117,12 +121,22 @@ namespace Client
             this.lblStatus.TabIndex = 14;
             this.lblStatus.Text = "waiting connect...";
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Location = new System.Drawing.Point(12, 160);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(325, 13);
+            this.lblWelcome.TabIndex = 15;
+            this.lblWelcome.Text = "Welcome to Multichat, please connect to the server to get started...";
+            // 
             // ClientForm
             // 
             this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(341, 379);
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.dgvIP);
             this.Controls.Add(this.btnConnect);
@@ -153,6 +167,7 @@ namespace Client
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.DataGridView dgvIP;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblWelcome;
     }
 }
 

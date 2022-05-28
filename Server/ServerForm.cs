@@ -150,18 +150,19 @@ namespace Server
         private void btnSend_Click(object sender, EventArgs e)
         {
             string clientIP = "";
-
+            string insert = "insert into message (message, clientIP) values (N'" + "server:   " + txtMessage.Text + "', N'" + cbbClient.SelectedValue.ToString() + "')";
             foreach (var sk in clientList)
             {
                clientIP = ((IPEndPoint)sk.LocalEndPoint).Address.ToString();
-                string insert = "insert into message (message, clientIP) values (N'" + "server:   " + txtMessage.Text + "', N'" + clientIP + "')";
+               
                 if (cbbClient.SelectedValue.ToString() == clientIP)
                 {
                     SendDataToClient(sk);
-                    cnnDB.RunSQL(insert);
+                   
                    
                 }
             }
+            cnnDB.RunSQL(insert);
             AddMessageToListView("server:   " + txtMessage.Text);
 
         }

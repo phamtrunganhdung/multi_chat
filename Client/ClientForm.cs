@@ -55,6 +55,10 @@ namespace Client
             try
             {
                 client.Connect(IP);
+                lblWelcome.Visible = false;
+                lsvMessage.Visible = true;
+                txtMessage.Visible = true;
+                btnSend.Visible = true;
             }
             catch
             {
