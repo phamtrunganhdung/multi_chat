@@ -37,6 +37,7 @@ namespace Client
             this.btnConnect = new System.Windows.Forms.Button();
             this.dgvIP = new System.Windows.Forms.DataGridView();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblWelcome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIP)).BeginInit();
@@ -47,7 +48,7 @@ namespace Client
             this.lsvMessage.HideSelection = false;
             this.lsvMessage.Location = new System.Drawing.Point(12, 54);
             this.lsvMessage.Name = "lsvMessage";
-            this.lsvMessage.Size = new System.Drawing.Size(322, 251);
+            this.lsvMessage.Size = new System.Drawing.Size(294, 290);
             this.lsvMessage.TabIndex = 0;
             this.lsvMessage.UseCompatibleStateImageBehavior = false;
             this.lsvMessage.View = System.Windows.Forms.View.List;
@@ -55,20 +56,20 @@ namespace Client
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(12, 311);
+            this.txtMessage.Location = new System.Drawing.Point(12, 350);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(217, 43);
+            this.txtMessage.Size = new System.Drawing.Size(189, 43);
             this.txtMessage.TabIndex = 1;
             this.txtMessage.Visible = false;
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(234, 311);
+            this.btnSend.Location = new System.Drawing.Point(207, 350);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(100, 43);
             this.btnSend.TabIndex = 2;
-            this.btnSend.Text = "Send";
+            this.btnSend.Text = "Send To Server";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Visible = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
@@ -87,25 +88,25 @@ namespace Client
             // dgvMessage
             // 
             this.dgvMessage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMessage.Location = new System.Drawing.Point(324, 364);
+            this.dgvMessage.Location = new System.Drawing.Point(507, 412);
             this.dgvMessage.Name = "dgvMessage";
             this.dgvMessage.Size = new System.Drawing.Size(10, 10);
             this.dgvMessage.TabIndex = 10;
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(212, 23);
+            this.btnConnect.Location = new System.Drawing.Point(117, 23);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(122, 27);
+            this.btnConnect.Size = new System.Drawing.Size(92, 27);
             this.btnConnect.TabIndex = 11;
-            this.btnConnect.Text = "Connect to Server";
+            this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // dgvIP
             // 
             this.dgvIP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvIP.Location = new System.Drawing.Point(308, 364);
+            this.dgvIP.Location = new System.Drawing.Point(491, 412);
             this.dgvIP.Name = "dgvIP";
             this.dgvIP.Size = new System.Drawing.Size(10, 10);
             this.dgvIP.TabIndex = 13;
@@ -115,19 +116,29 @@ namespace Client
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(9, 357);
+            this.lblStatus.Location = new System.Drawing.Point(9, 412);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(91, 13);
             this.lblStatus.TabIndex = 14;
             this.lblStatus.Text = "waiting connect...";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(215, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 27);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Disconnect";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Location = new System.Drawing.Point(12, 160);
+            this.lblWelcome.Location = new System.Drawing.Point(9, 207);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(325, 13);
-            this.lblWelcome.TabIndex = 15;
+            this.lblWelcome.TabIndex = 20;
             this.lblWelcome.Text = "Welcome to Multichat, please connect to the server to get started...";
             // 
             // ClientForm
@@ -135,8 +146,9 @@ namespace Client
             this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 379);
+            this.ClientSize = new System.Drawing.Size(326, 434);
             this.Controls.Add(this.lblWelcome);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.dgvIP);
             this.Controls.Add(this.btnConnect);
@@ -167,6 +179,7 @@ namespace Client
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.DataGridView dgvIP;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblWelcome;
     }
 }

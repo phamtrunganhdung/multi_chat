@@ -76,7 +76,11 @@ namespace Client
         }
         void CloseClient()
         {
-            client.Close();
+            
+            lblWelcome.Visible = true;
+            lsvMessage.Visible = false;
+            txtMessage.Visible = false;
+            btnSend.Visible = false;
         }
         void SendData()
             
@@ -121,6 +125,12 @@ namespace Client
             txtMessage.Clear();
         }
 
+        //void AddClientMessageToClientListView(string s)
+        //{
+        //    lsvClientMessage.Items.Add(new ListViewItem() { Text = s });
+        //    txtMessage.Clear();
+        //}
+
         byte[] SerializeData(object obj)
         {
             MemoryStream stream = new MemoryStream();
@@ -145,7 +155,7 @@ namespace Client
 
         private void ClientForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CloseClient();
+            client.Close();
         }
 
         private void ClientForm_Load(object sender, EventArgs e)
@@ -169,6 +179,11 @@ namespace Client
         private void btnConnect_Click(object sender, EventArgs e)
         {
             ConnectToSerrver(dgvIP.SelectedCells[0].Value.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CloseClient();
         }
     }
 }

@@ -51,6 +51,8 @@ namespace Server
                         clientList.Add(client);
                         clientOnline = clientOnline + 1;
                         tsslClientOnline.Text = clientOnline.ToString();
+
+
                         Thread receive = new Thread(ReceiveData);
                         receive.IsBackground = true;
                         receive.Start(client);

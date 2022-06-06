@@ -60,6 +60,17 @@ namespace Client
             cmd.Dispose();
             cmd = null;
         }
+        public void FillCombo(string sql, ComboBox cbo, string id, string name)
+        {
+            SqlDataAdapter adap = new SqlDataAdapter(sql, cnn);
+            DataTable data = new DataTable();
+            adap.Fill(data);
+
+            cbo.DataSource = data;
+            cbo.DisplayMember = name;
+            cbo.ValueMember = id;
+
+        }
 
     }
 
