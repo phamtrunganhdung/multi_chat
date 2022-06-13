@@ -19,7 +19,7 @@ namespace Server
     {
         IPEndPoint IP;
         Socket server;
-        List<Socket> clientList;
+        //List<Socket> clientList;
         int clientOnline =0;
         ConnectDB cnnDB = new ConnectDB();
         public ServerForm()
